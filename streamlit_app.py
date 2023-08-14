@@ -6,7 +6,7 @@ st.title('🦜🔗 Quickstart App')
 
 # Check for OpenAI API Key in Streamlit's secrets
 if 'OPENAI_API_KEY' in st.secrets:
-    st.sidebar.success('API key already provided!', icon='✅')
+    st.sidebar.success('API key successfully loaded from secrets!', icon='✅')
     openai_api_key = st.secrets['OPENAI_API_KEY']
 else:
     openai_api_key = st.sidebar.text_input('Enter OpenAI API Key:', type='password')
@@ -18,7 +18,7 @@ def generate_response(input_text):
     st.info(llm(input_text))
 
 with st.form('my_form'):
-    text = st.text_area('Enter text:', 'What can I help you with?')
+    text = st.text_area('Enter text:', value="", help="How can I help you?")
     submitted = st.form_submit_button('Submit')
     if submitted and openai_api_key.startswith('sk-'):
         generate_response(text)
